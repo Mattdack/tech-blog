@@ -45,8 +45,19 @@ router.get(`/dashboard`, async (req, res) => {
     if(!res.sessions.logged_in) {
         res.redirect(`/status`);
     }
+    const usersPosts = await Post.findAll({
+        where: {
+            UserId: req.session.user_id,
+        },
+    });
 
-    
+    const usersPostsReady = usersPosts.map((post) => post.get({ plain:true }));
+
+    res.render(`dashboard`, {
+        Posts: usersPostsReady,
+        logged_in: req.session.logged_in
+    });
+
   } catch (err) {
     res.status(500).json(err);
   }
