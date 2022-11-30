@@ -4,11 +4,10 @@ const { User, Post, Comment } = require(`../models`);
 
 router.get(`/`, async (req, res) => {
   try {
-    const allPosts = Post.findAll({
+    const allPosts = await Post.findAll({
       include: [
         {
           model: User,
-          attributes: `username`,
         },
         {
           model: Comment,
@@ -20,6 +19,7 @@ router.get(`/`, async (req, res) => {
 
     res.render(`homepage`, {
       Posts: allPostsReady,
+      logged_in: req.session.logged_in
     });
   } catch (err) {
     res.status(500).json(err);
@@ -41,10 +41,10 @@ router.get(`/signup`, async (req,res) => {
 })
 
 router.get(`/dashboard`, async (req, res) => {
+  if(!req.session.logged_in) {
+      return res.redirect(`/status`);
+  }
   try {
-    if(!res.sessions.logged_in) {
-        res.redirect(`/status`);
-    }
     const usersPosts = await Post.findAll({
         where: {
             UserId: req.session.user_id,
@@ -61,6 +61,23 @@ router.get(`/dashboard`, async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
+});
+
+router.get(`/newPost`, async (req, res) => {
+  if(!req.session.logged_in) {
+    return res.redirect(`/status`);
+  }
+  try {
+    res.render(`newPost`, {
+      logged_in: req.session.logged_in
+    })
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/sessions", (req, res) => {
+  res.json(req.session);
 });
 
 module.exports = router;

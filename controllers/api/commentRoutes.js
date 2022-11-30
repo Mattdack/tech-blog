@@ -3,7 +3,7 @@ const { User, Post, Comment } = require(`../../models`);
 
 router.get(`/`, async (req, res) => {
   try {
-    const allComments = Comment.findAll({
+    const allComments = await Comment.findAll({
       include: [
         {
           model: User,
@@ -22,9 +22,9 @@ router.get(`/`, async (req, res) => {
   }
 });
 
-router.get(`/id`, async (req, res) => {
+router.get(`/:id`, async (req, res) => {
   try {
-    const oneComment = Comment.findByPk(req.params.id, {
+    const oneComment = await Comment.findByPk(req.params.id, {
       include: [
         {
           model: User,
@@ -47,7 +47,7 @@ router.get(`/id`, async (req, res) => {
 
 router.post(`/`, async (req, res) => {
   try {
-    const newComment = Comment.create({
+    const newComment = await Comment.create({
       content: req.body.content,
       UserId: req.body.userId,
       PostId: req.body.postId,
@@ -58,7 +58,7 @@ router.post(`/`, async (req, res) => {
   }
 });
 
-router.put(`/id`, async (req, res) => {
+router.put(`/:id`, async (req, res) => {
   try {
     const updatedComment = await Comment.update(
       {
@@ -82,7 +82,7 @@ router.put(`/id`, async (req, res) => {
   }
 });
 
-router.delete(`/id`, async (req, res) => {
+router.delete(`/:id`, async (req, res) => {
   try {
     const deletedComment = await Comment.destroy({
       where: {
