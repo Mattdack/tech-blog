@@ -1,0 +1,20 @@
+<div class="grid justify-center grow">
+      <div id={{Posts.id}} class="min-w-4/5 border-4 border-black-400 hover:shadow-lg grow">
+        <h3 class = "font-black">{{Posts.title}}</h3>
+        <h4 class = "text-xs">Author: {{Posts.User.username}}</h4>
+        <h4 class = "text-xs">Created: {{Posts.createdAt}}</h4>
+        <br />
+        <p>{{Posts.content}}</p>
+      </div>
+      <br>
+      <div>
+        <textarea id="content" class = "w-4/5 border border-4 border-black-100">Enter Comment Content Here </textarea>
+        <button class="ml-5 px-3 py-1 rounded font-semibold bg-gray-400 hover:bg-gray-300 text-gray-800" id = "createComment">Leave Comment</button>
+        <h4>Previous Comments:</h4>
+        {{#each Posts.Comments as |Comment|}}
+        <div>
+            <p>{{content}}</p>
+        </div>
+        {{/each}}
+      </div>
+  </div>
