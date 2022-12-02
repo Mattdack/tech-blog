@@ -1,13 +1,15 @@
 <main>
-  <h2>My Blog Posts:</h2>
-  <br />
+  <h2 class="font-black">My Blog Posts:</h2>
+  <br /> 
   <div class="grid justify-center grow">
     {{#each Posts as |Post|}}
-      <div id={{id}} class="w-4/5 border-4 border-black-400 hover:shadow-lg grow">
-        <h3>{{title}}</h3>
+    <a href = "/updatePost/{{id}}">
+      <div id={{id}} class="min-w-4/5 border-4 border-black-400 hover:shadow-lg grow post">
+        <h3 class = "font-black">{{title}}</h3>
         <br />
         <p>{{content}}</p>
       </div>
+      </a>
       <br />
     {{/each}}
   </div>

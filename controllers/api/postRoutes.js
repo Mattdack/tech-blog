@@ -60,7 +60,7 @@ router.put(`/:id`, async (req, res) => {
       {
         title: req.body.title,
         content: req.body.content,
-        UserId: req.body.userId,
+        UserId: req.session.user_id,
       },
       {
         where: {
@@ -86,9 +86,10 @@ router.delete(`/:id`, async (req, res) => {
       },
     });
 
-    if (deletedUser === 0) {
+    if (deletedPost === 0) {
       return res.status(404).json({ msg: `Provided Post ID not found.` });
     }
+    console.log("Post Deleted");
     res.status(200).json(deletedPost);
   } catch (err) {
     res.status(500).json(err);

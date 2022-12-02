@@ -15,32 +15,32 @@
       class="flex flex-column items-center flex bg-gray-800 bg-opacity-90 px-12 py-4 mx-100 shadow-2xl w-12/12"
     >
       <div class="text-2xl text-brown font-semibold inline-flex items-center">
-        <h1>Tech Blog</h1>
+        <h1 class ="text-white">Tech Blog</h1>
       </div>
       <div>
         <ul class="flex text-brown">
           <a
-            class="ml-5 px-3 py-1 rounded font-semibold bg-gray-100 text-gray-800"
+            class="ml-5 px-3 py-1 rounded font-semibold bg-gray-100 text-gray-800 hover:bg-gray-400 hover:text-white"
             href="/"
           >Home</a>
           <a
-            class="ml-5 px-3 py-1 rounded font-semibold bg-gray-100 text-gray-800"
+            class="ml-5 px-3 py-1 rounded font-semibold bg-gray-100 text-gray-800 hover:bg-gray-400 hover:text-white"
             href="/dashboard"
           >Dashboard</a>
           {{#if logged_in}}
             <button
-              class="ml-5 px-3 py-1 rounded font-semibold bg-gray-100 text-gray-800"
+              class="ml-5 px-3 py-1 rounded font-semibold bg-gray-100 text-gray-800 hover:bg-gray-400 hover:text-white"
               id="logoutBtn"
               href="/"
             >Logout</button>
           {{else}}
             <button
-              class="ml-5 px-3 py-1 rounded font-semibold bg-gray-100 text-gray-800"
+              class="ml-5 px-3 py-1 rounded font-semibold bg-gray-100 text-gray-800 hover:bg-gray-400 hover:text-white"
               id="loginBtn"
               href="/login"
             >Login</button>
             <button
-              class="ml-5 px-3 py-1 rounded font-semibold bg-gray-100 text-gray-800"
+              class="ml-5 px-3 py-1 rounded font-semibold bg-gray-100 text-gray-800 hover:bg-gray-400 hover:text-white"
               id="signupBtn"
               href="/signup"
             >Sign-Up</button>

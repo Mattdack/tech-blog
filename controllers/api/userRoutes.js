@@ -107,7 +107,6 @@ router.delete(`/:id`, async (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
-    console.log("Fetch Made It ====================")
     const userData = await User.findOne({ where: { username: req.body.username } });
 
     if (!userData) {
@@ -117,7 +116,6 @@ router.post('/login', async (req, res) => {
       return;
     }
 
-    console.log("Found User ======================")
     const validPassword = userData.checkPassword(req.body.password);
 
     if (!validPassword) {
@@ -126,7 +124,6 @@ router.post('/login', async (req, res) => {
         .json({ message: 'Incorrect password, please try again' });
       return;
     }
-    console.log("Correct Password ==================")
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;

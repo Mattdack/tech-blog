@@ -16,7 +16,6 @@ router.get(`/`, async (req, res) => {
     });
 
     const allPostsReady = allPosts.map((post) => post.get({ plain: true }));
-    console.log(allPostsReady[0]);
     res.render(`homepage`, {
       Posts: allPostsReady,
       logged_in: req.session.logged_in,
@@ -75,7 +74,36 @@ router.get(`/newPost`, async (req, res) => {
   }
 });
 
-router.get(`/:id`, async (req, res) => {
+router.get(`/onePost/:id`, async (req, res) => {
+  try {
+    const onePost = await Post.findByPk(parseInt(req.params.id), {
+      include: [
+        {
+          model: User,
+        },
+        {
+          model: Comment,
+          include: [
+            {
+              model:User,
+            },
+          ]
+        },
+      ],
+    });
+    const onePostReady = onePost.get({ plain: true });
+    res.render(`onePost`, {
+      Posts: onePostReady,
+      Comments: onePostReady.Comments,
+      user_id: req.session.user_id,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get(`/updatePost/:id`, async (req, res) => {
   if (!req.session.logged_in) {
     return res.redirect(`/status`);
   }
@@ -87,14 +115,19 @@ router.get(`/:id`, async (req, res) => {
         },
         {
           model: Comment,
+          include: [
+            {
+              model:User,
+            },
+          ]
         },
       ],
     });
-    console.log(onePost + "====================")
     const onePostReady = onePost.get({ plain: true });
-    console.log(onePostReady)
-    res.render(`onePost`, {
+    res.render(`updatePost`, {
       Posts: onePostReady,
+      Comments: onePostReady.Comments,
+      user_id: req.session.user_id,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -103,7 +136,12 @@ router.get(`/:id`, async (req, res) => {
 });
 
 router.get("/sessions", (req, res) => {
-  res.json(req.session);
+  try{
+    res.status(200).json(req.session);
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;

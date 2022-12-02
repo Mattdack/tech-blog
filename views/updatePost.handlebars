@@ -1,0 +1,14 @@
+<main>
+    <h2>Create New Post:</h2>
+    <div>
+        <textarea id="title" class = "w-4/5 border border-4 border-black-100" data-postId = {{Posts.id}}>{{Posts.title}} </textarea>
+        <br>
+        <textarea id="content" class = "w-4/5 border border-4 border-black-100">{{Posts.content}} </textarea>
+        <br>
+        <button class="ml-5 px-3 py-1 rounded font-semibold bg-gray-400 hover:bg-gray-300 text-gray-800" id = "updatePost" href = "/dashboard">Update Post</button>
+        <button class="ml-5 px-3 py-1 rounded font-semibold bg-gray-400 hover:bg-gray-300 text-gray-800" id = "deletePost" href = "/dashboard">Delete Post</button>
+        
+    </div>
+</main>
+
+<script src ="/js/updatePost.js"></script>
