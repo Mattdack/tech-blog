@@ -10,7 +10,7 @@ createCommentBtn.addEventListener("click", event => {
         postId: postNumber,
     }
     console.log(commentObj);
-    fetch(`/api/commments/`, {
+    fetch(`/api/comments/`, {
         method: "POST",
         body: JSON.stringify(commentObj),
         headers: {
@@ -18,7 +18,7 @@ createCommentBtn.addEventListener("click", event => {
         }
     }).then((res)=>{
         if(res.ok){
-            // location.reload();
+            location.reload();
             console.log("New comment made.");
         } else {
             alert("Issue with leaving comment.");
